@@ -1,5 +1,11 @@
 import SwiftUI
 
+public protocol ProcessingButtonStyle: ButtonStyle {
+  
+  func processing(_ isProcessing: Bool) -> Self
+  
+}
+
 public struct ButtonState: Equatable {
   /// available also `_styled_isPressed`
   public let isPressed: Bool
@@ -14,7 +20,7 @@ public struct ButtonState: Equatable {
 /// - Available Environment Values:
 /// - isPressed: ``\._styled_isPressed``
 /// - isProcessing: ``\._styled_isProcessing``
-public struct ButtonStyleModifier<Modified: View>: ButtonStyle {
+public struct ButtonStyleModifier<Modified: View>: ProcessingButtonStyle {
 
   @Environment(\.isEnabled) private var isEnabled
 
@@ -47,10 +53,9 @@ public struct ButtonStyleModifier<Modified: View>: ButtonStyle {
     .allowsHitTesting(isProcessing == false)
   }
 
-  public func processing(_ isProcessing: Bool) -> Self {
-    var new = self
-    new.isProcessing = isProcessing
-    return new
+  public consuming func processing(_ isProcessing: Bool) -> Self {
+    self.isProcessing = isProcessing
+    return self
   }
 
 }
