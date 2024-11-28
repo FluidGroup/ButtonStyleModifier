@@ -13,7 +13,7 @@ Button("Button") {
           .foregroundColor(Color.secondary)
       )
       .opacity(state.isEnabled ? 1 : 0.3)
-  } 
+}
 ```
 
 `ButtonStyleModifier` supports indicating state of processing by `.processing()` modifier.  
