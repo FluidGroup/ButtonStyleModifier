@@ -1,9 +1,9 @@
 import SwiftUI
 
 public protocol ProcessingButtonStyle: ButtonStyle {
-  
+
   func processing(_ isProcessing: Bool) -> Self
-  
+
 }
 
 public struct ButtonState: Equatable {
@@ -66,3 +66,36 @@ extension EnvironmentValues {
 
   @Entry public var _styled_isProcessing: Bool = false
 }
+
+#if DEBUG
+struct BookExample: View, PreviewProvider {
+  var body: some View {
+    ContentView()
+  }
+
+  static var previews: some View {
+    Self()
+      .previewDisplayName(nil)
+  }
+
+  private struct ContentView: View {
+
+    var body: some View {
+      Button("Button") {
+        print("")
+      }
+      .buttonStyle(
+        ButtonStyleModifier { label, state in
+          label
+            .padding()
+            .background(
+              RoundedRectangle(cornerRadius: .infinity, style: .continuous)                
+                .foregroundColor(Color.secondary)
+            )
+            .opacity(state.isEnabled ? 1 : 0.3)
+        }          
+      )
+    }
+  }
+}
+#endif
