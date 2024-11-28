@@ -15,3 +15,16 @@ Button("Button") {
       .opacity(state.isEnabled ? 1 : 0.3)
   } 
 ```
+
+`ButtonStyleModifier` supports indicating state of processing by `.processing()` modifier.  
+This state can be read from state parameter in ButtonStyleModifier.
+
+ButtonStyleModifier sets the following environment values for making styles in ViewModifier.
+
+```swift
+extension EnvironmentValues {
+  @Entry public var _styled_isPressed: Bool = false
+
+  @Entry public var _styled_isProcessing: Bool = false
+}
+```
